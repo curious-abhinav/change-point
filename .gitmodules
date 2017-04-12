@@ -1,0 +1,3 @@
+[submodule "src/models/bayesian_changepoint_detection"]
+	path = src/models/bayesian_changepoint_detection
+	url = https://github.com/hildensia/bayesian_changepoint_detection.git
