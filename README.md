@@ -1,7 +1,7 @@
 Change Point
 ==============================
 
-Finding change points in high dimensional responses of neural circuits
+Finding change points in high dimensional responses of neural circuits. First demo in notebooks.
 
 Project Organization
 ------------
