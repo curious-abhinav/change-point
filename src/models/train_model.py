@@ -86,6 +86,9 @@ def summary_corr_matrices(discrete_spikes, gauss_width, block_width, case):
         trans_diff_corr=convolve_series(pop_sum)
     elif case=='frobenius':
         trans_diff_corr=np.linalg.norm(corr_matrices, axis=(1,2))
+    elif case=='diff_frobenius':
+        diff_corr_matrices=np.diff(corr_matrices, axis=0)
+        trans_diff_corr=np.linalg.norm(diff_corr_matrices, axis=(1,2))
     
     
     return trans_diff_corr
