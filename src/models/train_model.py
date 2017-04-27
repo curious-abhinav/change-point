@@ -30,7 +30,7 @@ def detect_changes(data_retina, params):
 
     spikes=data_retina['spikeTimes']
     num_neurons=spikes.shape[1]
-    plt.figure(figsize=(18,5))
+    plt.figure() #figsize=(18,5
     for i in range(num_neurons):
         plt.plot(spikes[0,i][0].T, i*np.ones(spikes[0,i][0].size), '.k')
 
