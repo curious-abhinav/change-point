@@ -23,7 +23,7 @@ def detect_changes(data_retina, params):
     data_categories=build_features.correlation_categories(data_retina)
     spikes=data_retina['spikeTimes']
     num_neurons=spikes.shape[1]
-    last_spike=np.array([spikes[0,i][0].max() for i in range(num_neurons)])
+    last_spike=np.array([spikes[0,i][0].max() for i in range(num_neurons) if spikes[0,i].size >0])
     duration=last_spike.max() + 200
     last_stim=np.array([stim[i].max() for i in range(len(stim))])
     
@@ -33,12 +33,30 @@ def detect_changes(data_retina, params):
     plt.figure() #figsize=(18,5
     for i in range(num_neurons):
         plt.plot(spikes[0,i][0].T, i*np.ones(spikes[0,i][0].size), '.k')
+    plt.xticks(rotation='vertical')
 
-    visualize.plot_stim(stim, data_categories, file)
+    #visualize.plot_stim(stim, data_categories, file)
     sum_diff_corr={}
     for method in method_corr:
         sum_diff_corr[method]=block_corr_change_retina(data_retina, duration, gauss_width, block_width, res, case=method)
     return (sum_diff_corr, stim)
+
+def detect_brian_spikes_changes(brian_data, params):
+
+    res=params['res']
+    block_width=params['block_width']
+    gauss_width=params['gauss_width']
+    #file=data_retina['file']
+    method_corr=params['methods']
+    sum_diff_corr={}
+    for method in method_corr:
+        sum_diff_corr[method]=summary_corr_matrices(brian_data, gauss_width, block_width, case=method)
+
+    return (sum_diff_corr)
+
+
+
+
 
 def summary_corr_matrices(discrete_spikes, gauss_width, block_width, case):
     """
@@ -97,9 +115,9 @@ def block_corr_change_retina(data_retina, duration, gauss_width, block_width, re
     #stim=data_retina['stimTimes'][0,0]
     spikes=data_retina['spikeTimes']
     num_neurons=spikes.shape[1]
-    last_spike=np.array([spikes[0,i][0].max() for i in range(num_neurons)])
+    last_spike=np.array([spikes[0,i][0].max() for i in range(num_neurons) if spikes[0,i].size >0])
     duration=last_spike.max() + 200
-    discrete_spikes=np.array([build_features.spikes_to_discrete(spikes[0,i][0], duration,res) for i in range(num_neurons)])
+    discrete_spikes=np.array([build_features.spikes_to_discrete(spikes[0,i][0], duration,res) for i in range(num_neurons) ])
     print(discrete_spikes.shape)
     sum_diff_corr=summary_corr_matrices(discrete_spikes, gauss_width, block_width, case)
     return sum_diff_corr

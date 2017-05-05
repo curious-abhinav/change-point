@@ -80,4 +80,4 @@ def plot_cp_results(sum_diff_corr,stim, data_retina, params):
                 print(i)
                 plt.plot(stim[i][0,:], np.nanmax(sum_diff_corr[method][np.isfinite(sum_diff_corr[method])])*np.ones(stim[i].shape[1]), '.', color=color_ctgry[data_categories[count]])
                 plt.xticks(rotation='vertical')
-        plt.title(method)
+        plt.title(method + ",  " + file)
