@@ -133,3 +133,21 @@ def convolve_series(series):
     return filtered_coactivation
         #print len(filtered_coactivation)
 
+def change_1d_series(summary_stat, model, cost_metric, params):
+    """Use PELT algorithm to detect change in summary statistic time series"""
+    #from changepy import pelt
+    #from changepy.costs import normal_mean, poisson, exponential
+
+    res=params['res']
+    block_width=params['block_width']
+
+    cp_cost=cost_metric
+    cp_pts=model(cp_cost(summary_stat), len(summary_stat))
+    time_pt=np.zeros(summary_stat.size * res * block_width)
+    change_points=np.array(cp_pts) * res * block_width
+    
+    time_pt[change_points]=1
+
+    return time_pt
+
+

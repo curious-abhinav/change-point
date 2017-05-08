@@ -61,6 +61,7 @@ def plot_cp_results(sum_diff_corr,stim, data_retina, params):
         fig = plt.figure()
         ax = fig.add_subplot(111)
         ax.set_color_cycle([cm(1.*i/NUM_COLORS) for i in range(NUM_COLORS)])
+        
         if method=='pop_sum':
             for count,i in enumerate(stim.dtype.names):
                 #subc=next(color)

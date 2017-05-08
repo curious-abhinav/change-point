@@ -24,9 +24,10 @@ def spikes_to_discrete(spikes, duration, res):
     INPUT
     duration and res in same units
     """
-    n_bins = np.floor(duration / res)
+    n_bins = int(np.floor(duration / res))
     discrete_spikes = np.zeros(n_bins)
-    spike_times = list(np.floor(spikes / res))
+
+    spike_times = list(np.floor(spikes / res).astype(int))
     discrete_spikes[spike_times] = 1
 
     return discrete_spikes
