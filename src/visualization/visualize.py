@@ -77,7 +77,7 @@ def plot_cp_results(sum_diff_corr,stim, data_retina, params):
             plt.plot(time_pt, sum_diff_corr[method])
             for count,i in enumerate(stim.dtype.names):
                 #subc=next(color)
-                print(i)
+                #print(i)  printing stim names
                 plt.plot(stim[i][0,:], np.nanmax(sum_diff_corr[method][np.isfinite(sum_diff_corr[method])])*np.ones(stim[i].shape[1]), '.', color=color_ctgry[data_categories[count]])
                 plt.xticks(rotation='vertical')
         plt.title(method + ",  " + file)

@@ -118,7 +118,7 @@ def block_corr_change_retina(data_retina, duration, gauss_width, block_width, re
     last_spike=np.array([spikes[0,i][0].max() for i in range(num_neurons) if spikes[0,i].size >0])
     duration=last_spike.max() + 200
     discrete_spikes=np.array([build_features.spikes_to_discrete(spikes[0,i][0], duration,res) for i in range(num_neurons) ])
-    print(discrete_spikes.shape)
+    #print(discrete_spikes.shape)
     sum_diff_corr=summary_corr_matrices(discrete_spikes, gauss_width, block_width, case)
     return sum_diff_corr
 
